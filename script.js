@@ -233,7 +233,7 @@ const weddingConfig = {
     { src: "images/gallery/Celina John-8456.webp", thumb: "images/gallery/thumbnails/Celina John-8456.webp", alt: "A close portrait of John and Celina smiling together outdoors.", position: "center 42%", caption: "" },
     { src: "images/gallery/Celina John-8524.webp", thumb: "images/gallery/thumbnails/Celina John-8524.webp", alt: "John and Celina laughing together in the garden.", position: "center 44%", caption: "" },
     { src: "images/gallery/Celina John-8621.webp", thumb: "images/gallery/thumbnails/Celina John-8621.webp", alt: "John and Celina embracing beneath leafy trees.", position: "center 45%", caption: "" },
-    { src: "images/gallery/Celina John-8690.webp", thumb: "images/gallery/thumbnails/Celina John-8690.webp", alt: "John and Celina sharing a picnic outdoors.", position: "center 48%", caption: "" },
+    { src: "images/gallery/Celina John-8713.webp", thumb: "images/gallery/thumbnails/Celina John-8713.webp", alt: "John and Celina sharing a picnic outdoors.", position: "center 48%", caption: "" },
     { src: "images/gallery/Celina John-8785.webp", thumb: "images/gallery/thumbnails/Celina John-8785.webp", alt: "John and Celina relaxing together on a picnic blanket.", position: "center 45%", caption: "" },
     { src: "images/gallery/Celina John-8837.webp", thumb: "images/gallery/thumbnails/Celina John-8837.webp", alt: "John and Celina sharing a playful moment on their blanket.", position: "center 45%", caption: "" },
     { src: "images/gallery/Celina John-9085.webp", thumb: "images/gallery/thumbnails/Celina John-9085.webp", alt: "John and Celina sitting together on the basketball court.", position: "center 44%", caption: "" },
