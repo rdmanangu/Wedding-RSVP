@@ -386,12 +386,12 @@ body.js-ready .reveal.visible { opacity: 1; transform: none; }
 .placeholder-text { font-style: italic; color: var(--ink-soft); }
 
 /* ---------- Venue cards (ceremony + reception) ---------- */
-/* row-gap 0 keeps card rows flush; the two cards are separated by a margin
-   (reset at >=860px, where both cards sit on the same shared row tracks). */
-.venue-grid { display: grid; column-gap: var(--space-8); row-gap: 0; align-items: stretch; }
-.venue-card + .venue-card { margin-top: var(--space-8); }
+.venue-date { margin: 0 auto 1.5rem; text-align: center; color: var(--wine); font: 600 1.2rem var(--font-head); }
+.venue-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; align-items: stretch; }
+.venue-card + .venue-card { margin-top: 0; }
 .venue-card {
   display: flex; flex-direction: column; background: var(--ivory); overflow: hidden;
+  border: 1px solid var(--gold); border-radius: 16px;
 }
 /* Gold focus rings only manage ~1.96:1 on ivory; burgundy clears 3:1. */
 .venue-card :focus-visible { outline-color: var(--burgundy); }
@@ -399,9 +399,10 @@ body.js-ready .reveal.visible { opacity: 1; transform: none; }
 #details .corner { opacity: .5; }
 
 .venue-head {
-  text-align: center; padding: 1.7rem 1.4rem 1.5rem; color: var(--ivory);
+  text-align: center; padding: 0 1.4rem 1.5rem; color: var(--ivory);
   background: linear-gradient(160deg, var(--burgundy), var(--wine));
   display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .3rem;
+  min-height: 390px;
 }
 .venue-icon {
   width: 54px; height: 54px; border-radius: 50%; display: grid; place-items: center; margin-bottom: .35rem;
@@ -411,12 +412,9 @@ body.js-ready .reveal.visible { opacity: 1; transform: none; }
 .venue-icon svg { width: var(--icon-size-md); height: var(--icon-size-md); }
 /* Optional photo (config ceremony.photo / reception.photo): bleeds to the
    card's top edge; stays display:none when the config field is empty. */
-.venue-photo {
-  display: block; align-self: stretch; flex: none;
-  width: calc(100% + 2.8rem); max-width: none; height: clamp(180px, 24vw, 240px);
-  margin: -1.7rem -1.4rem .3rem; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 10px;
-  border-bottom: 1.5px solid var(--gold); background: var(--rose);
-}
+.venue-photo-wrap { width: 100%; aspect-ratio: 16 / 9; overflow: hidden; }
+.venue-photo { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center; }
+.venue-photo[data-photo="ceremony"] { object-position: center 35%; }
 .venue-kicker { font: 700 .79rem var(--font-body); letter-spacing: .3em; text-transform: uppercase; color: var(--gold); margin: 0; }
 .venue-name { font-family: var(--font-head); font-weight: 600; font-size: clamp(1.55rem, 4.4vw, 2rem); line-height: 1.2; color: var(--ivory); margin: .15rem 0 0; }
 .venue-sub { font: 600 1rem var(--font-body); color: var(--rose); margin: .15rem 0 0; }
@@ -433,11 +431,15 @@ body.js-ready .reveal.visible { opacity: 1; transform: none; }
 .venue-place { margin: 0; padding-left: calc(22px + .7rem); font-size: .95rem; font-style: italic; color: var(--ink-soft); }
 .venue-plus { margin: 0; padding-left: calc(22px + .7rem); font-size: .85rem; letter-spacing: .02em; color: var(--ink-soft); }
 
-.venue-mapwrap { display: flex; flex-direction: column; gap: .45rem; padding: 0 1.5rem .6rem; }
-.venue-map { border: 1px solid var(--gold); border-radius: 14px; overflow: hidden; background: var(--rose); }
-.venue-map iframe { display: block; width: 100%; aspect-ratio: 16 / 9; height: auto; border: 0; }
-.venue-actions { display: grid; gap: .7rem; margin-top: auto; padding: 1.1rem 1.5rem 1.7rem; background: var(--ivory); }
+.venue-map { position: relative; border: 1px solid var(--gold); border-radius: 12px; overflow: hidden; background: var(--rose); }
+.venue-map iframe { display: block; width: 100%; height: 220px; border: 0; pointer-events: none; }
+.venue-map.map-enabled iframe { pointer-events: auto; }
+.map-enable { position: absolute; inset: auto 50% 1rem auto; transform: translateX(50%); border: 1px solid var(--gold); border-radius: 999px; padding: .5rem .75rem; background: rgba(255, 248, 240, .94); color: var(--wine); font: 700 .78rem var(--font-body); white-space: nowrap; cursor: pointer; }
+.map-enabled .map-enable { opacity: 0; pointer-events: none; }
+.venue-address { padding: .8rem 1.5rem; background: var(--ivory); }
+.venue-actions { display: grid; grid-template-columns: 1fr 1fr; gap: .7rem; margin-top: auto; padding: 1.1rem 1.5rem 1.7rem; background: var(--ivory); }
 .venue-actions .btn { width: 100%; }
+.venue-card#ceremony .venue-name { font-size: clamp(1.3rem, 2.5vw, 1.8rem); }
 .copy-status { text-align: center; min-height: 1.6em; margin: 1rem 0 0; color: var(--burgundy); font-weight: 700; font-size: .9rem; }
 .copy-status.light { color: var(--gold); }
 
@@ -447,7 +449,7 @@ body.js-ready .reveal.visible { opacity: 1; transform: none; }
   background-image: var(--paper-tex);
   position: relative;
 }
-.entourage-section .container { max-width: 1180px; }
+.entourage-section .container { max-width: 860px; }
 .entourage-floral {
   position: absolute;
   z-index: 0;
@@ -481,7 +483,7 @@ body.js-ready .reveal.visible { opacity: 1; transform: none; }
 .entourage-major > h3 {
   margin: 0 0 1.8rem;
   color: var(--burgundy);
-  font: 400 clamp(2rem, 5vw, 2.8rem)/1.1 var(--font-script);
+  font: 400 clamp(2rem, 5vw, 2.2rem)/1.1 var(--font-script);
   text-align: center;
 }
 .entourage-group {
@@ -496,8 +498,8 @@ body.js-ready .reveal.visible { opacity: 1; transform: none; }
 }
 .entourage-group h4 {
   margin: 0 0 .85rem;
-  color: var(--wine);
-  font: 600 .84rem/1.3 var(--font-body);
+  color: #5C0018;
+  font: 600 14px/1.3 var(--font-body);
   letter-spacing: .18em;
   text-transform: uppercase;
 }
@@ -509,15 +511,19 @@ body.js-ready .reveal.visible { opacity: 1; transform: none; }
 .entourage-group li {
   margin: 0;
   color: #2B1A1A;
-  font: 600 17px/1.7 var(--font-head);
-  overflow-wrap: anywhere;
+  font: 600 18px/1.7 var(--font-head);
+  overflow-wrap: normal;
+  word-break: normal;
 }
 .entourage-party-leads { margin-bottom: 2.1rem; }
 .entourage-flower-girls { margin-top: 2.2rem; }
 .entourage-flower-girls ul {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: .15rem 28px;
+  gap: .35rem 28px;
+}
+.flower-girl-centered {
+  margin: .35rem auto 0;
   text-align: center;
 }
 
@@ -581,6 +587,16 @@ body.js-ready .reveal.visible { opacity: 1; transform: none; }
 .schedule-note { text-align: center; font-style: italic; color: var(--rose); margin-top: 1.2rem; }
 .cal-actions { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: .9rem; margin-top: 2rem; }
 .cal-icon { width: var(--icon-size-md); height: var(--icon-size-md); }
+.schedule-panel {
+  max-width: 760px;
+  margin: 3rem auto 0;
+  padding: clamp(2rem, 5vw, 3rem) clamp(1.25rem, 4vw, 2.5rem);
+  border-radius: var(--radius-card);
+  background: var(--wine);
+  color: var(--ivory);
+}
+.schedule-panel .section-head { margin-bottom: 1.5rem; }
+.schedule-panel .section-title { color: var(--ivory); }
 
 /* ==========================================================
    GIFTS / RSVP / NOTE-FROM-US — shared design language
@@ -638,6 +654,7 @@ body.js-ready .reveal.visible { opacity: 1; transform: none; }
 .rsvp-note { margin: 1.3rem auto 0; max-width: 34ch; font: 700 var(--text-caption) var(--font-body); letter-spacing: .2em; text-transform: uppercase; color: var(--gold); opacity: .9; }
 .rsvp-section .deadline { color: var(--gold); }
 .deadline { color: var(--gold); font-weight: 700; margin-bottom: 1rem; }
+.rsvp-seats { color: var(--rose); font-size: 1rem; margin: .5rem auto 0; }
 
 /* ---------- A Note From Us (letter) ---------- */
 .note-section .sec-botanical { opacity: .22; }
@@ -665,6 +682,8 @@ body.js-ready .reveal.visible { opacity: 1; transform: none; }
   border: 2px solid var(--gold); box-shadow: inset 0 0 0 3px rgba(92, 0, 24, .5), 0 6px 16px rgba(74, 0, 21, .16);
 }
 .letter-seal img { width: 64%; height: 64%; aspect-ratio: 1 / 1; object-fit: contain; border-radius: 50%; }
+.rsvp-letter { margin-top: 2.5rem; }
+.rsvp-letter .section-head { margin-bottom: 1.5rem; }
 
 /* ---------- Gallery ---------- */
 .gallery-section .container { width: min(1240px, 100% - 2.5rem); }
@@ -699,6 +718,8 @@ body.js-ready .reveal.visible { opacity: 1; transform: none; }
 .faq summary::after { content: "+"; color: var(--gold-deep); font-size: 1.5rem; line-height: 1; }
 .faq details[open] summary::after { content: "\2212"; }
 .faq details p { padding-bottom: 1rem; margin: 0; color: var(--ink); max-width: 72ch; }
+.gifts-faq-card { margin: 2rem auto 0; max-width: 760px; }
+.gifts-faq-card .section-head { margin-bottom: 1.5rem; }
 
 /* ---------- Closing ---------- */
 
@@ -788,7 +809,7 @@ body.js-ready .reveal.visible { opacity: 1; transform: none; }
   .entourage-grid-two, .entourage-grid-three { grid-template-columns: 1fr; }
   .entourage-grid-two > .entourage-group:nth-child(odd),
   .entourage-grid-two > .entourage-group:nth-child(even) { text-align: center; }
-  .entourage-flower-girls ul { grid-template-columns: 1fr; gap: .15rem; }
+  .entourage-flower-girls ul { grid-template-columns: 1fr; gap: .35rem; }
   .entourage-major { margin-top: 2.5rem; padding-top: 1.6rem; }
 }
 @media (min-width: 860px) {
@@ -796,14 +817,6 @@ body.js-ready .reveal.visible { opacity: 1; transform: none; }
   .hero-photo { justify-self: center; }
   .hero-monogram { margin-left: 0; }
   .hero-text .orn { margin-left: 0; }
-  .venue-grid { grid-template-columns: 1fr 1fr; column-gap: 1.6rem; }
-  /* Shared row tracks keep head / info / map / actions aligned across both
-     cards. Cards are placed explicitly: auto-placement would otherwise stack
-     them after the first 4-row span. */
-  .venue-card { display: grid; grid-template-rows: subgrid; }
-  .venue-card:nth-child(1) { grid-column: 1; grid-row: 1 / span 4; }
-  .venue-card:nth-child(2) { grid-column: 2; grid-row: 1 / span 4; }
-  .venue-card + .venue-card { margin-top: 0; }
   .attire-grid { grid-template-columns: 1fr 1fr; gap: 1.6rem; }
 
   /* Alternating timeline */
@@ -813,6 +826,18 @@ body.js-ready .reveal.visible { opacity: 1; transform: none; }
   .t-item:nth-child(even) { margin-left: auto; }
   .t-item::before { left: auto; right: calc(-2.4rem - 7px); }
   .t-item:nth-child(even)::before { right: auto; left: calc(-2.4rem - 7px); }
+}
+@media (min-width: 700px) {
+  .venue-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: repeat(6, auto); column-gap: 24px; row-gap: 0; }
+  .venue-card { grid-row: span 6; grid-template-rows: repeat(6, auto); }
+  @supports (grid-template-rows: subgrid) {
+    .venue-card { display: grid; grid-template-rows: subgrid; }
+  }
+  @supports not (grid-template-rows: subgrid) {
+    .venue-card { min-height: 930px; }
+    .venue-head { min-height: 390px; }
+    .venue-actions { margin-top: auto; }
+  }
 }
 @media (min-width: 1100px) {
   .gallery { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1.25rem; }
@@ -826,6 +851,93 @@ body.js-ready .reveal.visible { opacity: 1; transform: none; }
   .lb-btn { width: 44px; height: 44px; }
   .lb-prev { left: .35rem; }
   .lb-next { right: .35rem; }
+}
+
+/* ---------- Mobile alignment and spacing polish ---------- */
+@media (max-width: 639px) {
+  .section {
+    padding-block: clamp(3rem, 9vw, 3.75rem);
+  }
+  .container {
+    width: min(100% - 2rem, 1100px);
+  }
+  .section-head {
+    margin-bottom: 1.75rem;
+  }
+  .hero {
+    padding: 3.5rem 0 4.5rem;
+  }
+  .hero-grid {
+    gap: 1.6rem;
+  }
+  .hero-photo,
+  .hero-monogram,
+  .attire-photo,
+  .attire-photo-guests {
+    margin-inline: auto;
+  }
+  .hero-photo {
+    width: min(76vw, 320px);
+  }
+  .hero-monogram img,
+  .letter-seal img,
+  .wc-monogram img {
+    object-fit: contain;
+  }
+  .venue-photo {
+    object-fit: cover;
+  }
+  .venue-head,
+  .venue-info,
+  .venue-address,
+  .venue-actions {
+    padding-inline: 1.15rem;
+  }
+  .venue-photo-wrap { width: 100%; margin-inline: 0; }
+  .schedule-panel {
+    margin-top: 2rem;
+    padding: 1.5rem 1rem;
+  }
+  @media (max-width: 399px) {
+    .venue-actions { grid-template-columns: 1fr; }
+  }
+  .schedule li {
+    grid-template-columns: 5.4rem minmax(0, 1fr);
+    gap: .8rem;
+    padding-block: .9rem;
+  }
+  .sch-time {
+    font-size: 1.25rem;
+  }
+  .sch-title {
+    font-size: 1.2rem;
+  }
+  .attire-guest {
+    margin-top: 2rem;
+    padding-block: 1.75rem 2rem;
+  }
+  .attire-photo {
+    max-width: min(300px, 100%);
+  }
+  .attire-photo-guests {
+    max-width: 100%;
+  }
+  .rsvp-letter {
+    margin-top: 2rem;
+  }
+  .letter-card {
+    padding: 2rem 1.25rem;
+  }
+  .gallery-section .section-head {
+    margin-bottom: 2rem;
+  }
+  .gifts-faq-card {
+    margin-top: 1.5rem;
+    padding-inline: 1.25rem;
+  }
+  .lightbox-content {
+    width: 100%;
+  }
 }
 
 /* Keep the card and both cover actions reachable on short landscape screens. */

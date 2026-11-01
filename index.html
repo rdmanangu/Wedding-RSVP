@@ -9,21 +9,18 @@
   <meta property="og:title" content="John &amp; Celina | Wedding Invitation" />
   <meta property="og:description" content="Join us on December 26, 2026. View the details and RSVP." />
   <meta property="og:type" content="website" />
-  <!-- og:url: the public address of this invitation. Replace YOUR-DOMAIN with
-       your real domain (e.g. https://example.com/) so shares link to your site. -->
-  <meta property="og:url" content="https://YOUR-DOMAIN/" />
-  <!-- og:image: the picture shown when the link is shared. Upload a 1200x630
-       image as images/og.jpg and replace YOUR-DOMAIN here. -->
-  <meta property="og:image" content="https://YOUR-DOMAIN/images/og.jpg" />
+  <!-- Relative social metadata resolves against the deployed invitation URL. -->
+  <meta property="og:url" content="./" />
+  <meta property="og:image" content="./images/Wedding Monogram.jpeg" />
   <!-- twitter:card: asks X/Twitter to show that same large image on the card. -->
   <meta name="twitter:card" content="summary_large_image" />
   <!-- robots: keeps the invitation out of search engines; share it yourself. -->
   <meta name="robots" content="noindex, nofollow" />
 
   <!-- FONTS: Cormorant Garamond (headings), Great Vibes (script), Lato (body) -->
-  <link rel="icon" type="image/png" sizes="96x96" href="images/favicon.png">
-  <link rel="shortcut icon" href="images/favicon.png">
-  <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
+  <link rel="icon" type="image/jpeg" href="images/Wedding Monogram.jpeg">
+  <link rel="shortcut icon" type="image/jpeg" href="images/Wedding Monogram.jpeg">
+  <link rel="apple-touch-icon" href="images/Wedding Monogram.jpeg">
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,500&family=Great+Vibes&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
@@ -284,33 +281,32 @@
           <svg class="orn" aria-hidden="true"><use href="#ornament" /></svg>
         </header>
 
+        <p class="venue-date" data-date-long></p>
         <div class="venue-grid">
           <!-- CEREMONY -->
           <article class="venue-card reveal" id="ceremony">
+            <div class="venue-photo-wrap"><img class="venue-photo" data-photo="ceremony" alt="" width="1600" height="900" loading="lazy" hidden /></div>
             <div class="venue-head">
-              <img class="venue-photo" data-photo="ceremony" alt="" width="1600" height="900" loading="lazy" hidden />
               <span class="venue-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-church" /></svg></span>
               <p class="venue-kicker">The Ceremony</p>
               <h3 class="venue-name" data-cfg="ceremony.name"></h3>
+              <p class="venue-sub" data-cfg="ceremony.subtitle"></p>
             </div>
 
             <div class="venue-info">
               <ul class="venue-meta">
                 <li>
-                  <svg class="venue-meta-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-calendar" /></svg>
-                  <span data-date-long></span>
-                </li>
-                <li>
                   <svg class="venue-meta-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-clock" /></svg>
-                  <span data-cfg="ceremony.time"></span>
+                  <span data-cfg="ceremony.timeText"></span>
                 </li>
               </ul>
             </div>
 
-            <div class="venue-mapwrap">
-              <div class="venue-map">
-                <iframe data-map-embed="ceremony" title="Map of Nuestra Señora de la Merced Parish Church, the wedding ceremony venue" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
-              </div>
+            <div class="venue-map" data-map-shell="ceremony">
+              <iframe data-map-embed="ceremony" title="Map of Nuestra Señora de la Merced Parish Church, the wedding ceremony venue" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+              <button type="button" class="map-enable" data-map-enable="ceremony">Tap to explore the map</button>
+            </div>
+            <div class="venue-address">
               <p class="venue-addr">
                 <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-pin" /></svg>
                 <span data-cfg="ceremony.address"></span>
@@ -320,39 +316,35 @@
             </div>
 
             <div class="venue-actions">
-              <a class="btn btn-sm" data-map-view="ceremony" target="_blank" rel="noopener noreferrer">View Location</a>
-              <a class="btn btn-sm btn-ghost" data-map-dir="ceremony" target="_blank" rel="noopener noreferrer">Get Directions</a>
+              <a class="btn btn-sm" data-map-dir="ceremony" target="_blank" rel="noopener noreferrer">Get Directions</a>
               <button type="button" class="btn btn-sm btn-ghost venue-copy" data-copy="ceremony">Copy Address</button>
             </div>
           </article>
 
           <!-- RECEPTION -->
           <article class="venue-card reveal" id="reception">
+            <div class="venue-photo-wrap"><img class="venue-photo" data-photo="reception" alt="" width="1600" height="900" loading="lazy" hidden /></div>
             <div class="venue-head">
-              <img class="venue-photo" data-photo="reception" alt="" width="1600" height="900" loading="lazy" hidden />
               <span class="venue-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-dining" /></svg></span>
               <p class="venue-kicker">The Reception</p>
               <h3 class="venue-name" data-cfg="reception.name"></h3>
-              <p class="venue-sub" id="receptionSub" data-cfg="reception.details"></p>
+              <p class="venue-sub" id="receptionSub" data-cfg="reception.subtitle"></p>
             </div>
 
             <div class="venue-info">
               <ul class="venue-meta">
                 <li>
-                  <svg class="venue-meta-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-calendar" /></svg>
-                  <span data-date-long></span>
-                </li>
-                <li>
                   <svg class="venue-meta-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-clock" /></svg>
-                  <span id="receptionTime"></span>
+                  <span data-cfg="reception.timeText"></span>
                 </li>
               </ul>
             </div>
 
-            <div class="venue-mapwrap">
-              <div class="venue-map">
-                <iframe data-map-embed="reception" title="Map of The Chapters, MDSF Social Hall, the wedding reception venue" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
-              </div>
+            <div class="venue-map" data-map-shell="reception">
+              <iframe data-map-embed="reception" title="Map of The Chapters, MDSF Social Hall, the wedding reception venue" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+              <button type="button" class="map-enable" data-map-enable="reception">Tap to explore the map</button>
+            </div>
+            <div class="venue-address">
               <p class="venue-addr">
                 <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-pin" /></svg>
                 <span data-cfg="reception.address"></span>
@@ -362,49 +354,30 @@
             </div>
 
             <div class="venue-actions">
-              <a class="btn btn-sm" data-map-view="reception" target="_blank" rel="noopener noreferrer">View Location</a>
-              <a class="btn btn-sm btn-ghost" data-map-dir="reception" target="_blank" rel="noopener noreferrer">Get Directions</a>
+              <a class="btn btn-sm" data-map-dir="reception" target="_blank" rel="noopener noreferrer">Get Directions</a>
               <button type="button" class="btn btn-sm btn-ghost venue-copy" data-copy="reception">Copy Address</button>
             </div>
           </article>
         </div>
         <p class="copy-status" id="copyStatus" role="status" aria-live="polite"></p>
-      </div>
-    </section>
 
-    <!-- 5. THE ENTOURAGE -->
-    <section class="section entourage-section" id="entourage" aria-labelledby="entourage-title">
-      <div class="container">
-        <header class="section-head reveal">
-          <p class="script entourage-script">The Entourage</p>
-          <h2 id="entourage-title" class="entourage-intro">The people who share our joy.</h2>
-        </header>
-
-        <div class="entourage-content">
-          <div id="entourage-rendered"></div>
+        <div class="schedule-panel" id="schedule">
+          <header class="section-head reveal">
+            <p class="eyebrow">The day of</p>
+            <h2 id="schedule-title" class="section-title">Wedding-Day Schedule</h2>
+            <svg class="orn" aria-hidden="true"><use href="#ornament" /></svg>
+          </header>
+          <ol class="schedule reveal" id="scheduleList"></ol>
+          <p class="schedule-note" id="scheduleNote"></p>
+          <div class="cal-actions reveal">
+            <svg class="cal-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-calendar" /></svg>
+            <a class="btn btn-light" id="gcalBtn" target="_blank" rel="noopener noreferrer">Add to Google Calendar</a>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- 6. WEDDING-DAY SCHEDULE -->
-    <section class="section wine" id="schedule" aria-labelledby="schedule-title">
-      <div class="container narrow">
-        <header class="section-head reveal">
-          <p class="eyebrow">The day of</p>
-          <h2 id="schedule-title" class="section-title">Wedding-Day Schedule</h2>
-          <svg class="orn" aria-hidden="true"><use href="#ornament" /></svg>
-        </header>
-        <ol class="schedule reveal" id="scheduleList"></ol>
-        <p class="schedule-note" id="scheduleNote"></p>
-
-        <div class="cal-actions reveal">
-          <svg class="cal-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-calendar" /></svg>
-          <a class="btn btn-light" id="gcalBtn" target="_blank" rel="noopener noreferrer">Add to Google Calendar</a>
-        </div>
-      </div>
-    </section>
-
-    <!-- 6. DRESS CODE / ATTIRE GUIDE (content edited in script.js > dressCode) -->
+    <!-- 4. DRESS CODE / ATTIRE GUIDE (content edited in script.js > dressCode) -->
     <section class="section paper" id="dresscode" aria-labelledby="attire-title">
       <div class="container">
         <header class="section-head reveal">
@@ -494,35 +467,14 @@
 
         <!-- Hidden until a real deadline is set in script.js -->
         <p class="deadline" id="rsvpDeadline" hidden></p>
-      </div>
-    </section>
+        <p class="rsvp-seats" id="rsvpSeats" hidden></p>
 
-    <!-- 8. OUR LOVE STORY (milestones are edited in script.js > story) -->
-    <section class="section rose" id="story" aria-labelledby="story-title">
-      <div class="container">
-        <header class="section-head reveal">
-          <p class="eyebrow">How it began</p>
-          <h2 id="story-title" class="section-title">Our Love Story</h2>
-          <svg class="orn" aria-hidden="true"><use href="#ornament" /></svg>
-        </header>
-        <ol class="timeline" id="timeline"></ol>
-      </div>
-    </section>
-
-    <!-- 9. A NOTE FROM US -->
-    <section class="section paper note-section" id="note" aria-labelledby="note-title">
-      <svg class="sec-botanical note-botanical tl" aria-hidden="true" focusable="false"><use href="#sprig" /></svg>
-      <svg class="sec-botanical note-botanical br" aria-hidden="true" focusable="false"><use href="#sprig" /></svg>
-
-      <div class="container">
-        <header class="section-head reveal">
-          <p class="eyebrow">A Letter to Our Guests</p>
-          <p class="script note-script">A Note From Us</p>
-          <h2 id="note-title" class="section-title">With Our Whole Hearts</h2>
-          <svg class="orn" aria-hidden="true"><use href="#ornament" /></svg>
-        </header>
-
-        <article class="letter-card reveal">
+        <article class="letter-card reveal rsvp-letter" id="note" aria-labelledby="note-title">
+          <header class="section-head">
+            <p class="eyebrow">A Letter to Our Guests</p>
+            <p class="script note-script">A Note From Us</p>
+            <svg class="orn" aria-hidden="true"><use href="#ornament" /></svg>
+          </header>
           <svg class="letter-flourish tl" aria-hidden="true" focusable="false"><use href="#sprig" /></svg>
           <svg class="letter-flourish br" aria-hidden="true" focusable="false"><use href="#sprig" /></svg>
           <p class="script letter-greeting">Dear Family &amp; Friends,</p>
@@ -535,7 +487,18 @@
       </div>
     </section>
 
-    <!-- 10. GALLERY (photo selections are listed in script.js > weddingConfig.capturedMomentsPhotos) -->
+    <!-- 6. THE ENTOURAGE -->
+    <section class="section entourage-section" id="entourage" aria-labelledby="entourage-title">
+      <div class="container">
+        <header class="section-head reveal">
+          <p class="script entourage-script">The Entourage</p>
+          <h2 id="entourage-title" class="entourage-intro">The people who share our joy.</h2>
+        </header>
+        <div class="entourage-content"><div id="entourage-rendered"></div></div>
+      </div>
+    </section>
+
+    <!-- 7. GALLERY (photo selections are listed in script.js > weddingConfig.capturedMomentsPhotos) -->
     <section class="section rose gallery-section" id="gallery" aria-labelledby="gallery-title">
       <div class="container">
         <header class="section-head reveal">
@@ -551,7 +514,7 @@
       </div>
     </section>
 
-    <!-- 11. FAQ (built from script.js so it never contradicts the confirmed details) -->
+    <!-- 8. FAQ (built from script.js so it never contradicts the confirmed details) -->
     <section class="section paper" id="faq" aria-labelledby="faq-title">
       <div class="container faq-container">
         <header class="section-head reveal">
@@ -560,25 +523,13 @@
           <svg class="orn" aria-hidden="true"><use href="#ornament" /></svg>
         </header>
         <div class="faq reveal" id="faqList"></div>
-      </div>
-    </section>
-
-    <!-- 12. GIFTS (hidden until giftMessage is set in script.js) -->
-    <section class="section wine gifts-section" id="gifts" aria-labelledby="gifts-title" hidden>
-      <span class="sec-ring gifts-ring-tl" aria-hidden="true"></span>
-      <span class="sec-ring gifts-ring-br" aria-hidden="true"></span>
-      <svg class="sec-botanical tr" aria-hidden="true" focusable="false"><use href="#sprig" /></svg>
-      <svg class="sec-botanical bl" aria-hidden="true" focusable="false"><use href="#sprig" /></svg>
-
-      <div class="container center">
-        <header class="section-head reveal">
-          <p class="eyebrow">From the Heart</p>
-          <p class="script gifts-script">Gifts</p>
-          <h2 id="gifts-title" class="section-title">Your Presence Is Our Gift</h2>
-          <svg class="orn" aria-hidden="true"><use href="#ornament" /></svg>
-        </header>
-
-        <article class="gifts-card reveal">
+        <article class="gifts-card gifts-faq-card reveal" id="gifts" aria-labelledby="gifts-title" hidden>
+          <header class="section-head">
+            <p class="eyebrow">From the Heart</p>
+            <p class="script gifts-script">Gifts</p>
+            <h2 id="gifts-title" class="section-title">Your Presence Is Our Gift</h2>
+            <svg class="orn" aria-hidden="true"><use href="#ornament" /></svg>
+          </header>
           <svg class="gifts-flourish tl" aria-hidden="true" focusable="false"><use href="#sprig" /></svg>
           <svg class="gifts-flourish br" aria-hidden="true" focusable="false"><use href="#sprig" /></svg>
           <span class="gifts-heart" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#icon-heart" /></svg></span>
@@ -588,7 +539,7 @@
       </div>
     </section>
 
-    <!-- 13. CLOSING / THANK YOU -->
+    <!-- 9. CLOSING / THANK YOU -->
     <footer class="wedding-closing" id="closing" aria-labelledby="closing-title">
       <svg class="wc-corner wc-corner-tl" aria-hidden="true" focusable="false"><use href="#wc-corner" /></svg>
       <svg class="wc-corner wc-corner-br" aria-hidden="true" focusable="false"><use href="#wc-corner" /></svg>

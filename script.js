@@ -26,7 +26,7 @@ const weddingConfig = {
       "TWO HEARTS, ONE BEAUTIFUL BEGINNING",
       "John & Celina",
       "REQUEST THE PLEASURE OF YOUR COMPANY",
-      "DECEMBER 26, 2026"
+      "12.26.2026"
     ],
     durationScale: 1, // Scales every opening-animation delay and transition.
     envelopeWidth: "min(86vw, 520px, 84dvh)", // Responsive maximum envelope width.
@@ -49,7 +49,9 @@ const weddingConfig = {
   ceremony: {
     name: "Nuestra Señora de la Merced Parish Church",
     time: "2:00 PM",
-    address: "Barangay Bahay Pare, Candaba, Pampanga",
+    timeText: "Ceremony begins at 2:00 PM",
+    subtitle: "Candaba, Pampanga",
+    address: "Candaba - Baliuag Rd, Candaba, 2013 Pampanga",
     // Official Google Maps place URL: powers "View Location" and map fallbacks.
     placeUrl: "https://www.google.com/maps/place/2VJJ%2B5R2+Our+Lady+of+Mercy+Parish+Church,+Candaba+-+Baliuag+Rd,+Candaba,+2013+Pampanga/data=!4m2!3m1!1s0x3396fe0fd0ed4ecf:0x963db98b08af8bf2?sa=X&ved=1t:242&ictx=111",
     // Exact pin (latitude,longitude) used for the embedded preview and directions.
@@ -72,11 +74,14 @@ const weddingConfig = {
     landmark: ""
   },
 
-  // ---------- Reception (venue confirmed, schedule NOT yet provided) ----------
+  // ---------- Reception (venue and 5:00 PM start confirmed) ----------
   reception: {
     name: "The Chapters",
     details: "The Chapters, MDSF Social Hall",
-    address: "Tangos Baliwag, Bulacan",
+    subtitle: "MDSF Social Hall",
+    timeText: "Reception begins at 5:00 PM",
+    address: "Baliuag, Bulacan",
+    streetAddress: "", // TODO: fill in the confirmed street/barangay address.
     // Official Google Maps place URL: powers "View Location" and map fallbacks.
     placeUrl: "https://www.google.com/maps/place/The+Chapters,+MDSF+Social+Hall/@14.9687965,120.8917808,17z/data=!3m1!4b1!4m6!3m5!1s0x3396ff0602c40db5:0x228f4ba65c3e98a8!8m2!3d14.9687913!4d120.8943557!16s%2Fg%2F11sshkbyr2?entry=ttu&g_ep=EgoyMDI2MTAxMy4wIKXMDSoASAFQAw%3D%3D",
     // Exact pin (latitude,longitude) used for the embedded preview and directions.
@@ -91,9 +96,9 @@ const weddingConfig = {
     // Optional photo at the top of the card (images/ folder), with its alt text.
     // FILL IN ONLY A CONFIRMED DETAIL. Leave "" to show nothing (no placeholder).
     photo: "images/reception.jpg",
-    photoAlt: "The Chapters, MDSF Social Hall reception venue in Baliwag, Bulacan",
+    photoAlt: "The Chapters, MDSF Social Hall reception venue in Baliuag, Bulacan",
     startTime: "5:00 PM",   // e.g. "5:00 PM". Leave "" until confirmed.
-    endTime: "10:00 PM",     // e.g. "10:00 PM". Leave "" until confirmed.
+    endTime: "",     // e.g. "10:00 PM". Leave "" until confirmed.
     // Optional plain-language address or landmark, shown under the address.
     // FILL IN ONLY A CONFIRMED DETAIL. Leave "" to keep it hidden.
     landmark: ""
@@ -102,22 +107,23 @@ const weddingConfig = {
   // ---------- RSVP ----------
   rsvp: {
     url: "https://forms.gle/ZQGyfWB2T3SoHjm86",
-    deadline: "",    // "YYYY-MM-DD". Leave "" to hide. Do not guess a date.
-    contact: ""      // Optional organizer contact shown in the FAQ and after the deadline.
+    deadline: "2026-12-15",    // "YYYY-MM-DD". Leave "" to hide. Do not guess a date.
+    contact: "09299624294 or 09604445695",      // Optional organizer contact shown in the FAQ and after the deadline.
+    reservedSeats: "" // Optional confirmed per-guest seat count; stays hidden when empty.
   },
 
   // ---------- Wedding-day schedule ----------
   // An entry only appears if its "time" is filled in, and entries are listed in
-  // time order. The reception adds itself automatically as soon as
-  // reception.startTime is set, so it does not belong in this list.
+  // time order. The reception is added automatically when its confirmed start
+  // time is not already represented by a schedule entry.
   schedule: [
-    { time: "",        title: "Guest Arrival",         detail: "" },
+    { time: "1:30 PM",        title: "Guest Arrival",         detail: "" },
     { time: "2:00 PM", title: "Wedding Ceremony",      detail: "Nuestra Señora de la Merced Parish Church" },
-    { time: "",        title: "Ceremony Concludes",    detail: "" },
-    { time: "",        title: "Travel to Reception",   detail: "" },
-    { time: "",        title: "Reception Program",     detail: "" },
-    { time: "",        title: "Dinner",                detail: "" },
-    { time: "",        title: "Celebration",           detail: "" }
+    { time: "3:30 PM",        title: "Ceremony Concludes",    detail: "" },
+    { time: "4:00 PM",        title: "Cocktail hour begins",   detail: "" },
+    { time: "5:00 PM",        title: "Reception Program",     detail: "" },
+    { time: "7:00 PM",        title: "Dinner",                detail: "" },
+    { time: "10:00 PM",        title: "After Party",           detail: "" }
   ],
 
   // ---------- Dress code / attire guide ----------
@@ -130,12 +136,12 @@ const weddingConfig = {
     guestLabel: "Guest Attire",
     guestTitle: "Our Dear Guests",
     guestDescription: "We invite our guests to celebrate with us in formal or semi-formal attire inspired by our earthy neutral color palette.",
-    guestNote: "While our celebration is styled in burgundy and champagne gold, we kindly ask guests to dress in the earthy-neutral palette below.",
+    guestNote: "While our celebration is styled in burgundy and champagne gold, we kindly ask guests to dress in the earthy-neutral palette below. Please avoid white, ivory, taupe, and burgundy.",
     colors: [
       { name: "Olive Brown",     color: "rgb(91, 77, 50)" },
       { name: "Tan",             color: "rgb(216, 167, 131)" },
       { name: "Terracotta",      color: "rgb(147, 75, 60)" },
-      { name: "Champagne Cream", color: "rgb(235, 211, 159)" },
+      { name: "Cream",           color: "rgb(235, 211, 159)" },
       { name: "Sage Green",      color: "rgb(137, 132, 92)" }
     ]
   },
@@ -273,6 +279,7 @@ const weddingConfig = {
   document.documentElement.classList.add("js-ready");
 
   const cfg = weddingConfig;
+  const venues = { ceremony: cfg.ceremony, reception: cfg.reception };
   const $ = (s, r = document) => r.querySelector(s);
   const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
   const motionPreference = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -319,14 +326,20 @@ const weddingConfig = {
     const party = make("div", "entourage-party");
     party.appendChild(grid(data.weddingParty.leads, "entourage-grid-two entourage-party-leads"));
     party.appendChild(grid(data.weddingParty.groups, "entourage-grid-two"));
-    root.appendChild(major("Wedding Party", party));
+    root.appendChild(major("", party));
 
     root.appendChild(major("Secondary Sponsors", grid(data.secondarySponsors, "entourage-grid-three")));
 
     const ceremony = make("div", "entourage-ceremony");
     ceremony.appendChild(grid(data.ceremonyParticipants.groups, "entourage-grid-three"));
-    ceremony.appendChild(group(data.ceremonyParticipants.flowerGirls, "entourage-flower-girls"));
-    root.appendChild(major("Ceremony Participants", ceremony));
+    const flowerGirls = data.ceremonyParticipants.flowerGirls;
+    const flowerNames = flowerGirls.names || [];
+    const flowerColumns = make("div", "entourage-grid entourage-grid-two entourage-flower-girls");
+    flowerColumns.appendChild(group({ title: flowerGirls.title, names: flowerNames.slice(0, 4) }));
+    flowerColumns.appendChild(group({ title: flowerGirls.title, names: flowerNames.slice(4, 8) }));
+    ceremony.appendChild(flowerColumns);
+    ceremony.appendChild(group({ title: flowerGirls.title, names: flowerNames.slice(8, 9) }, "flower-girl-centered"));
+    root.appendChild(major("Little Attendants", ceremony));
   }
 
   renderEntourage();
@@ -358,35 +371,45 @@ const weddingConfig = {
     });
 
     const out = $("#rsvpDeadline");
-    if (!has(cfg.rsvp.deadline)) return; // no real deadline yet: stay hidden
-    const end = new Date(cfg.rsvp.deadline + "T23:59:59+08:00");
-    if (Number.isNaN(end.getTime())) return;
-    out.hidden = false;
-    if (Date.now() > end.getTime()) {
-      out.textContent = "The RSVP deadline has passed. Please contact the wedding organizer for assistance." +
-        (has(cfg.rsvp.contact) ? " " + cfg.rsvp.contact : "");
-    } else {
-      out.textContent = "Kindly reply by " + dateFmt.format(end) + ".";
+    if (has(cfg.rsvp.deadline)) {
+      const end = new Date(cfg.rsvp.deadline + "T23:59:59+08:00");
+      if (!Number.isNaN(end.getTime())) {
+        out.hidden = false;
+        if (Date.now() > end.getTime()) {
+          out.textContent = "The RSVP deadline has passed. Please contact the wedding organizer for assistance." +
+            (has(cfg.rsvp.contact) ? " " + cfg.rsvp.contact : "");
+        } else {
+          out.textContent = "Kindly reply by " + dateFmt.format(end) + ".";
+        }
+      }
+    }
+
+    const seats = Number(cfg.rsvp.reservedSeats);
+    const seatMessage = $("#rsvpSeats");
+    if (seatMessage && Number.isInteger(seats) && seats > 0) {
+      seatMessage.textContent = "We reserved " + seats + " seat" + (seats === 1 ? "" : "s") + " for you.";
+      seatMessage.hidden = false;
     }
   }
 
   /* ---------- Maps, directions, copy address ---------- */
   function mapLinks(venue) {
-    const q = enc(venue.coords);
+    const query = [venue.name, venue.address, venue.plusCode].filter(has).join(", ");
+    const q = enc(query);
     return {
       view: has(venue.placeUrl) ? venue.placeUrl : "https://www.google.com/maps?q=" + q,
       dir: "https://www.google.com/maps/dir/?api=1&destination=" + q,
       embed: has(venue.mapEmbedUrl) ? venue.mapEmbedUrl
-        : "https://www.google.com/maps?q=" + q + "&z=15&output=embed"
+        : "https://www.google.com/maps?q=" + q + "&z=16&output=embed"
     };
   }
 
   function setupMaps() {
-    if (cfg.ceremony.coords === cfg.reception.coords) {
+    if (venues.ceremony.coords === venues.reception.coords) {
       console.warn("Ceremony and reception map coordinates are identical. Check weddingConfig.");
     }
     ["ceremony", "reception"].forEach((key) => {
-      const v = cfg[key];
+      const v = venues[key];
       const links = mapLinks(v);
       const venueTitle = (key === "ceremony" ? v.name : (has(v.details) ? v.details : v.name));
       const kind = key === "ceremony" ? "wedding ceremony" : "wedding reception";
@@ -394,29 +417,26 @@ const weddingConfig = {
         f.src = links.embed;
         f.title = "Map of " + venueTitle + ", the " + kind + " venue";
       });
-      $$('[data-map-view="' + key + '"]').forEach((a) => {
-        a.href = links.view;
-        a.setAttribute("aria-label", "View the location of " + venueTitle + " on Google Maps");
-      });
       $$('[data-map-dir="' + key + '"]').forEach((a) => {
         a.href = links.dir;
         a.setAttribute("aria-label", "Get directions to " + venueTitle + ", the " + kind + " venue");
       });
+      $$('[data-map-enable="' + key + '"]').forEach((button) => {
+        button.addEventListener("click", () => {
+          const shell = button.closest(".venue-map");
+          if (!shell) return;
+          shell.classList.add("map-enabled");
+          button.setAttribute("aria-label", "Map interaction enabled for " + venueTitle);
+          button.textContent = "Map interaction enabled";
+        });
+      });
     });
-
-    const t = $("#receptionTime");
-    const r = cfg.reception;
-    if (has(r.startTime)) {
-      t.textContent = "Starts at " + r.startTime + (has(r.endTime) ? " · Ends at " + r.endTime : "");
-    } else {
-      t.textContent = "Reception schedule to follow.";
-    }
   }
 
   /* ---------- Venue cards: plus code, landmark, name dedupe ---------- */
   function setupVenueMeta() {
     ["ceremony", "reception"].forEach((key) => {
-      const v = cfg[key];
+      const v = venues[key];
       const plusEl = $('[data-plus="' + key + '"]');
       const placeEl = $('[data-place="' + key + '"]');
       if (plusEl) {
@@ -424,7 +444,8 @@ const weddingConfig = {
         else plusEl.hidden = true;
       }
       if (placeEl) {
-        if (has(v.landmark)) { placeEl.textContent = v.landmark; placeEl.hidden = false; }
+        const secondaryAddress = has(v.streetAddress) ? v.streetAddress : v.landmark;
+        if (has(secondaryAddress)) { placeEl.textContent = secondaryAddress; placeEl.hidden = false; }
         else placeEl.hidden = true;
       }
 
@@ -439,15 +460,6 @@ const weddingConfig = {
       }
     });
 
-    // Reception subtitle: drop the leading venue name so it never repeats.
-    const sub = $("#receptionSub");
-    if (sub) {
-      const r = cfg.reception;
-      let text = r.details || "";
-      if (text.indexOf(r.name) === 0) text = text.slice(r.name.length).replace(/^[\s,·\-–—]+/, "");
-      if (has(text)) sub.textContent = text;
-      else sub.hidden = true;
-    }
   }
 
   function setupVenue() {
@@ -481,11 +493,12 @@ const weddingConfig = {
   function setupCopy() {
     const status = $("#copyStatus");
     $$("[data-copy]").forEach((btn) => {
-      const v = cfg[btn.dataset.copy];
+      const v = venues[btn.dataset.copy];
       if (v && has(v.name)) btn.setAttribute("aria-label", "Copy the venue details of " + v.name);
       btn.addEventListener("click", () => {
         // Venue name, address, plus code, and the official Maps link when set.
-        const lines = [btn.dataset.copy === "ceremony" ? v.name : (has(v.details) ? v.details : v.name), v.address];
+        const lines = [has(v.details) ? v.details : v.name, v.address];
+        if (has(v.streetAddress)) lines.splice(1, 0, v.streetAddress);
         if (has(v.plusCode)) lines.push("Plus code " + v.plusCode);
         if (has(v.placeUrl)) lines.push(v.placeUrl);
         copyToClipboard(lines.join("\n"))
@@ -544,6 +557,7 @@ const weddingConfig = {
   /* ---------- Love story ---------- */
   function setupStory() {
     const list = $("#timeline");
+    if (!list) return;
     // A milestone shows only when it actually has content; empty ones never
     // render (no "coming soon" cards). The section hides when none remain.
     const items = cfg.story.filter((m) => has(m.text) || has(m.image));
@@ -587,8 +601,9 @@ const weddingConfig = {
       .filter((s) => has(s.time))
       .map((s) => ({ time: s.time, title: s.title, detail: s.detail }));
 
-    // The reception adds itself as soon as reception.startTime is confirmed.
-    if (has(r.startTime)) {
+    // Avoid duplicating a confirmed reception time already in the schedule.
+    if (has(r.startTime) &&
+        !entries.some((entry) => timeToMinutes(entry.time) === timeToMinutes(r.startTime))) {
       entries.push({
         time: r.startTime,
         title: has(r.name) ? "Reception at " + r.name : "Reception",
@@ -711,7 +726,7 @@ const weddingConfig = {
       { q: "Is there a dress code?", a: dressFaqAnswer(d) },
       has(cfg.rsvp.deadline) && { q: "When is the RSVP deadline?", a: dateFmt.format(new Date(cfg.rsvp.deadline + "T12:00:00+08:00")) + "." },
       has(cfg.parkingInfo) && { q: "Is there parking?", a: cfg.parkingInfo },
-      has(cfg.giftMessage) && { q: "Do you have a gift preference?", a: cfg.giftMessage },
+      has(cfg.giftMessage) && { q: "Do you have a gift preference?", a: "Please see the Gifts note below." },
       has(cfg.rsvp.contact) && { q: "Who can I contact with questions?", a: cfg.rsvp.contact }
     ].filter(Boolean).concat((cfg.extraFaq || []).filter((f) => has(f.q) && has(f.a)));
 
