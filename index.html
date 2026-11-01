@@ -21,7 +21,9 @@
   <meta name="robots" content="noindex, nofollow" />
 
   <!-- FONTS: Cormorant Garamond (headings), Great Vibes (script), Lato (body) -->
-  <link rel="icon" type="image/png" href="images/favicon.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="images/favicon.png">
+  <link rel="shortcut icon" href="images/favicon.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,500&family=Great+Vibes&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
@@ -155,6 +157,9 @@
             <svg class="card-corner card-corner-tl" aria-hidden="true"><use href="#sprig" /></svg>
             <svg class="card-corner card-corner-br" aria-hidden="true"><use href="#sprig" /></svg>
             <svg class="card-orn card-orn-top" aria-hidden="true"><use href="#ornament" /></svg>
+            <div class="card-monogram" aria-hidden="true">
+              <img src="images/Wedding Monogram.jpeg" alt="" width="1254" height="1254" loading="lazy" decoding="async" />
+            </div>
             <div class="card-lines" id="cardLines"></div>
             <svg class="card-orn card-orn-bottom" aria-hidden="true"><use href="#ornament" /></svg>
           </div>
@@ -185,9 +190,7 @@
           <i></i><i></i><i></i><i></i><i></i>
         </span>
 
-        <button type="button" class="env-seal" id="sealBtn" aria-label="Open the wedding invitation">
-          <span data-cfg="initials"></span>
-        </button>
+        <button type="button" class="env-seal" id="sealBtn" aria-label="Open the wedding invitation"></button>
       </div>
 
       <div class="cover-actions">
@@ -238,6 +241,9 @@
         </div>
 
         <div class="hero-text reveal">
+          <div class="hero-monogram">
+            <img src="images/Wedding Monogram.jpeg" alt="Wedding monogram" width="1254" height="1254" decoding="async" />
+          </div>
           <p class="script together">Together With Our Families</p>
           <h1 id="hero-title" class="hero-heading">Two Hearts, One Beautiful Beginning</h1>
           <p class="script hero-names" data-cfg="coupleNames"></p>
@@ -366,7 +372,21 @@
       </div>
     </section>
 
-    <!-- 5. WEDDING-DAY SCHEDULE -->
+    <!-- 5. THE ENTOURAGE -->
+    <section class="section entourage-section" id="entourage" aria-labelledby="entourage-title">
+      <div class="container">
+        <header class="section-head reveal">
+          <p class="script entourage-script">The Entourage</p>
+          <h2 id="entourage-title" class="entourage-intro">The people who share our joy.</h2>
+        </header>
+
+        <div class="entourage-content">
+          <div id="entourage-rendered"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. WEDDING-DAY SCHEDULE -->
     <section class="section wine" id="schedule" aria-labelledby="schedule-title">
       <div class="container narrow">
         <header class="section-head reveal">
@@ -389,32 +409,43 @@
       <div class="container">
         <header class="section-head reveal">
           <p class="eyebrow">Finer Details</p>
-          <p class="script attire-script">Attire Guide</p>
-          <h2 id="attire-title" class="section-title">Dress With Love</h2>
+          <h2 id="attire-title" class="section-title attire-title">The Attire Guide</h2>
+          <p class="script attire-script">Celebrating with us in style</p>
           <svg class="orn" aria-hidden="true"><use href="#ornament" /></svg>
         </header>
+
+        <div class="attire-group reveal">
+          <h3 class="attire-group-label" data-cfg="dressCode.sponsorLabel"></h3>
+          <svg class="attire-group-orn" aria-hidden="true"><use href="#ornament" /></svg>
+        </div>
 
         <div class="attire-grid">
           <!-- GENTLEMEN (principal sponsors) -->
           <article class="attire-card reveal">
             <svg class="attire-flourish tl" aria-hidden="true"><use href="#sprig" /></svg>
             <svg class="attire-flourish br" aria-hidden="true"><use href="#sprig" /></svg>
-            <span class="attire-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-tie" /></svg></span>
-            <p class="attire-label" data-cfg="dressCode.sponsorLabel"></p>
-            <h3 class="attire-name" data-cfg="dressCode.gentlemen.title"></h3>
+            <figure class="attire-photo">
+              <img src="images/gentleman-burgundy-tie.png"
+                   alt="Illustration of a gentleman wearing a black formal suit, white dress shirt, and burgundy necktie"
+                   width="1024" height="1536" loading="lazy" decoding="async" />
+            </figure>
+            <h4 class="attire-name" data-cfg="dressCode.gentlemen.title"></h4>
             <svg class="attire-divider" aria-hidden="true"><use href="#ornament" /></svg>
-            <p class="attire-desc" data-cfg="dressCode.gentlemen.attire"></p>
+            <ul class="attire-list" id="gentlemenAttire"></ul>
           </article>
 
           <!-- LADIES (principal sponsors) -->
           <article class="attire-card reveal">
             <svg class="attire-flourish tl" aria-hidden="true"><use href="#sprig" /></svg>
             <svg class="attire-flourish br" aria-hidden="true"><use href="#sprig" /></svg>
-            <span class="attire-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-dress" /></svg></span>
-            <p class="attire-label" data-cfg="dressCode.sponsorLabel"></p>
-            <h3 class="attire-name" data-cfg="dressCode.ladies.title"></h3>
+            <figure class="attire-photo">
+              <img src="images/taupe-satin-gown.png"
+                   alt="Illustration of a lady wearing an elegant floor-length taupe satin gown"
+                   width="1024" height="1536" loading="lazy" decoding="async" />
+            </figure>
+            <h4 class="attire-name" data-cfg="dressCode.ladies.title"></h4>
             <svg class="attire-divider" aria-hidden="true"><use href="#ornament" /></svg>
-            <p class="attire-desc" data-cfg="dressCode.ladies.attire"></p>
+            <ul class="attire-list" id="ladiesAttire"></ul>
           </article>
         </div>
 
@@ -424,7 +455,14 @@
           <svg class="attire-flourish br" aria-hidden="true"><use href="#sprig" /></svg>
           <p class="attire-label" data-cfg="dressCode.guestLabel"></p>
           <h3 class="attire-guest-title" data-cfg="dressCode.guestTitle"></h3>
+          <svg class="attire-divider" aria-hidden="true"><use href="#ornament" /></svg>
           <p class="attire-guest-desc" data-cfg="dressCode.guestDescription"></p>
+          <figure class="attire-photo attire-photo-guests">
+            <img src="images/fashion-lineup.png"
+                 alt="Illustration of the wedding couple and guests in formal attire inspired by an earthy neutral color palette"
+                 width="1312" height="1199" loading="lazy" decoding="async" />
+          </figure>
+          <p class="attire-palette-label">Our Earthy Neutral Palette</p>
           <ul class="attire-swatches" id="attireSwatches" aria-label="Earthy-neutral guest color palette"></ul>
           <hr class="attire-rule" />
           <p class="attire-note" data-cfg="dressCode.guestNote"></p>
@@ -491,7 +529,7 @@
           <div class="letter-body" id="noteBody"></div>
           <div class="letter-sign">
             <p class="script letter-signature">With love,<br /><span data-cfg="coupleNames"></span></p>
-            <span class="letter-seal" aria-hidden="true"><span data-cfg="initials"></span></span>
+            <span class="letter-seal" aria-hidden="true"><img src="images/Wedding Monogram.jpeg" alt="" width="1254" height="1254" loading="lazy" decoding="async" /></span>
           </div>
         </article>
       </div>
@@ -556,6 +594,9 @@
       <svg class="wc-corner wc-corner-br" aria-hidden="true" focusable="false"><use href="#wc-corner" /></svg>
 
       <div class="container wc-inner reveal">
+        <div class="wc-monogram" aria-hidden="true">
+          <img src="images/Wedding Monogram.jpeg" alt="" width="1254" height="1254" loading="lazy" decoding="async" />
+        </div>
         <p class="wc-eyebrow">With Gratitude</p>
         <h2 id="closing-title" class="wc-title">Thank You for Being<br />Part of Our Story</h2>
         <svg class="wc-divider" viewBox="0 0 240 24" aria-hidden="true" focusable="false"><use href="#ornament" /></svg>
@@ -590,6 +631,7 @@
   <!-- Decorative falling-petal layer (pointer-events none; hidden from assistive tech) -->
   <div id="petal-container" class="petal-container" aria-hidden="true"></div>
 
+  <script src="entourage-data.js"></script>
   <script src="script.js"></script>
 </body>
 </html>

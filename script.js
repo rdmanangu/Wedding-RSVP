@@ -14,10 +14,11 @@ const weddingConfig = {
   // ---------- Couple + date (confirmed) ----------
   coupleNames: "John & Celina",
   initials: "J & C",
+  monogramImage: "images/Wedding Monogram.jpeg", // Official crest for seals and photo fallback.
   displayDate: "December 26, 2026",
   envelope: {
     envelopeColor: "var(--burgundy)", // Main envelope face color.
-    sealInitials: "J & C", // Initials displayed on the wax seal.
+    sealInitials: "J & C", // Fallback initials if monogramImage is empty.
     sealColor: "var(--gold)", // Champagne-gold seal accent color.
     backgroundColor: "var(--ivory)", // Ivory opening-screen background.
     cardLines: [ // Invitation-card text, shown in this exact order.
@@ -64,8 +65,8 @@ const weddingConfig = {
     mapEmbedUrl: "",
     // Optional photo at the top of the card (images/ folder), with its alt text.
     // FILL IN ONLY A CONFIRMED DETAIL. Leave "" to show nothing (no placeholder).
-    photo: "",
-    photoAlt: "",
+    photo: "images/parish.jpeg",
+    photoAlt: "Nuestra Señora de la Merced Parish Church in Candaba, Pampanga",
     // Optional plain-language address or landmark, shown under the address.
     // FILL IN ONLY A CONFIRMED DETAIL. Leave "" to keep it hidden.
     landmark: ""
@@ -89,8 +90,8 @@ const weddingConfig = {
     mapEmbedUrl: "",
     // Optional photo at the top of the card (images/ folder), with its alt text.
     // FILL IN ONLY A CONFIRMED DETAIL. Leave "" to show nothing (no placeholder).
-    photo: "",
-    photoAlt: "",
+    photo: "images/reception.jpg",
+    photoAlt: "The Chapters, MDSF Social Hall reception venue in Baliwag, Bulacan",
     startTime: "5:00 PM",   // e.g. "5:00 PM". Leave "" until confirmed.
     endTime: "10:00 PM",     // e.g. "10:00 PM". Leave "" until confirmed.
     // Optional plain-language address or landmark, shown under the address.
@@ -123,19 +124,19 @@ const weddingConfig = {
   // Principal sponsors have a set attire; guests are asked to follow the
   // earthy-neutral palette. Edit all wording and swatches here.
   dressCode: {
-    sponsorLabel: "Dress Code for Principal Sponsors",
-    gentlemen: { title: "Gentlemen", attire: "Black suit with burgundy necktie" },
-    ladies:    { title: "Ladies",    attire: "Floor-length taupe gown" },
+    sponsorLabel: "Principal Sponsors",
+    gentlemen: { title: "Gentlemen", attire: ["Black formal suit", "White dress shirt", "Burgundy necktie"] },
+    ladies:    { title: "Ladies",    attire: ["Floor-length taupe gown"] },
     guestLabel: "Guest Attire",
-    guestTitle: "Earthy neutrals in formal or semi-formal attire",
-    guestDescription: "We invite our guests to wear formal or semi-formal attire in earthy, neutral tones.",
+    guestTitle: "Our Dear Guests",
+    guestDescription: "We invite our guests to celebrate with us in formal or semi-formal attire inspired by our earthy neutral color palette.",
     guestNote: "While our celebration is styled in burgundy and champagne gold, we kindly ask guests to dress in the earthy-neutral palette below.",
     colors: [
-      { name: "Deep Olive Brown",  color: "rgb(91, 77, 50)" },
-      { name: "Warm Beige",        color: "rgb(216, 167, 131)" },
-      { name: "Terracotta",        color: "rgb(147, 75, 60)" },
-      { name: "Champagne Beige",   color: "rgb(235, 211, 159)" },
-      { name: "Muted Olive Green", color: "rgb(137, 132, 92)" }
+      { name: "Olive Brown",     color: "rgb(91, 77, 50)" },
+      { name: "Tan",             color: "rgb(216, 167, 131)" },
+      { name: "Terracotta",      color: "rgb(147, 75, 60)" },
+      { name: "Champagne Cream", color: "rgb(235, 211, 159)" },
+      { name: "Sage Green",      color: "rgb(137, 132, 92)" }
     ]
   },
 
@@ -286,6 +287,50 @@ const weddingConfig = {
   };
   const enc = encodeURIComponent;
 
+  function renderEntourage() {
+    const root = $("#entourage-rendered");
+    const data = window.entourageData;
+    if (!root || !data) return;
+
+    const group = (item, extraClass) => {
+      const article = make("article", "entourage-group" + (extraClass ? " " + extraClass : ""));
+      const heading = make("h4", null, item.title);
+      const list = make("ul");
+      item.names.forEach((name) => list.appendChild(make("li", null, name)));
+      article.append(heading, list);
+      return article;
+    };
+    const grid = (items, className) => {
+      const container = make("div", "entourage-grid " + className);
+      items.forEach((item) => container.appendChild(group(item)));
+      return container;
+    };
+    const major = (title, content) => {
+      const section = make("section", "entourage-major reveal");
+      section.appendChild(make("h3", null, title));
+      section.appendChild(content);
+      return section;
+    };
+
+    root.replaceChildren();
+    root.appendChild(grid(data.parents, "entourage-grid-two"));
+    root.appendChild(major("Principal Sponsors", grid(data.principalSponsors, "entourage-grid-two")));
+
+    const party = make("div", "entourage-party");
+    party.appendChild(grid(data.weddingParty.leads, "entourage-grid-two entourage-party-leads"));
+    party.appendChild(grid(data.weddingParty.groups, "entourage-grid-two"));
+    root.appendChild(major("Wedding Party", party));
+
+    root.appendChild(major("Secondary Sponsors", grid(data.secondarySponsors, "entourage-grid-three")));
+
+    const ceremony = make("div", "entourage-ceremony");
+    ceremony.appendChild(grid(data.ceremonyParticipants.groups, "entourage-grid-three"));
+    ceremony.appendChild(group(data.ceremonyParticipants.flowerGirls, "entourage-flower-girls"));
+    root.appendChild(major("Ceremony Participants", ceremony));
+  }
+
+  renderEntourage();
+
   const dateFmt = new Intl.DateTimeFormat("en-PH", { dateStyle: "long", timeZone: cfg.timezone });
   const longDateFmt = new Intl.DateTimeFormat("en-PH", { weekday: "long", year: "numeric", month: "long", day: "numeric", timeZone: cfg.timezone });
 
@@ -390,6 +435,7 @@ const weddingConfig = {
         photoEl.addEventListener("error", () => { photoEl.hidden = true; photoEl.removeAttribute("src"); });
         photoEl.alt = has(v.photoAlt) ? v.photoAlt : "Photo of " + (has(v.details) ? v.details : v.name);
         photoEl.src = v.photo;
+        photoEl.hidden = false;
       }
     });
 
@@ -594,9 +640,25 @@ const weddingConfig = {
   }
 
   /* ---------- Dress code, note, gifts ---------- */
+  function attireItems(value) {
+    if (Array.isArray(value)) return value.filter(has);
+    return has(value) ? [value] : [];
+  }
+
+  function attireText(value) {
+    return attireItems(value)
+      .map((item, index) => index ? item.charAt(0).toLowerCase() + item.slice(1) : item)
+      .join(", ");
+  }
+
   function setupDressCode() {
     const ul = $("#attireSwatches");
     const d = cfg.dressCode || {};
+    [["#gentlemenAttire", d.gentlemen], ["#ladiesAttire", d.ladies]].forEach(([selector, group]) => {
+      const list = $(selector);
+      if (!list || !group) return;
+      attireItems(group.attire).forEach((item) => list.appendChild(make("li", "", item)));
+    });
     if (!ul) return;
     const colors = Array.isArray(d.colors) ? d.colors.filter((c) => has(c.name) && has(c.color)) : [];
     colors.forEach((c) => {
@@ -629,8 +691,10 @@ const weddingConfig = {
   function dressFaqAnswer(d) {
     if (!d) return "Dress code details to follow.";
     const parts = [];
-    if (d.gentlemen && has(d.gentlemen.attire)) parts.push("Gentlemen (principal sponsors): " + d.gentlemen.attire + ".");
-    if (d.ladies && has(d.ladies.attire)) parts.push("Ladies (principal sponsors): " + d.ladies.attire + ".");
+    const gentlemen = d.gentlemen ? attireText(d.gentlemen.attire) : "";
+    const ladies = d.ladies ? attireText(d.ladies.attire) : "";
+    if (has(gentlemen)) parts.push("Gentlemen (principal sponsors): " + gentlemen + ".");
+    if (has(ladies)) parts.push("Ladies (principal sponsors): " + ladies + ".");
     if (has(d.guestDescription)) parts.push(d.guestDescription);
     return parts.length ? parts.join(" ") : "Dress code details to follow.";
   }
@@ -668,9 +732,20 @@ const weddingConfig = {
     if (!stage || !images[0] || !images[1]) return;
 
     const fallback = () => {
-      const box = make("div", "photo-fallback", cfg.initials);
+      const box = make("div", "photo-fallback");
       box.setAttribute("role", "img");
-      box.setAttribute("aria-label", cfg.coupleNames + " monogram (photo coming soon)");
+      box.setAttribute("aria-label", cfg.coupleNames + " wedding monogram");
+      if (has(cfg.monogramImage)) {
+        const image = make("img", "photo-fallback-img");
+        image.src = cfg.monogramImage;
+        image.alt = "";
+        image.width = 1254;
+        image.height = 1254;
+        image.decoding = "async";
+        box.appendChild(image);
+      } else {
+        box.textContent = cfg.initials;
+      }
       stage.replaceWith(box);
     };
     if (!photos || !photos.length) {
@@ -1209,8 +1284,23 @@ const weddingConfig = {
     cover.style.setProperty("--enter-duration", time(350) + "ms");
     cover.style.setProperty("--cover-fade-duration", "500ms");
     const initials = envelopeConfig.sealInitials || cfg.initials;
-    sealButton.textContent = initials;
-    sealButton.setAttribute("aria-label", "Open the wedding invitation sealed with " + initials);
+    if (has(cfg.monogramImage)) {
+      const image = make("img", "env-seal-img");
+      image.src = cfg.monogramImage;
+      image.alt = "";
+      image.width = 1254;
+      image.height = 1254;
+      image.decoding = "async";
+      image.addEventListener("error", () => {
+        sealButton.textContent = initials;
+        sealButton.setAttribute("aria-label", "Open the wedding invitation sealed with " + initials);
+      });
+      sealButton.replaceChildren(image);
+      sealButton.setAttribute("aria-label", "Open the wedding invitation sealed with the " + cfg.coupleNames + " monogram");
+    } else {
+      sealButton.textContent = initials;
+      sealButton.setAttribute("aria-label", "Open the wedding invitation sealed with " + initials);
+    }
 
     const lines = Array.isArray(envelopeConfig.cardLines) ? envelopeConfig.cardLines : [];
     lines.forEach((text, index) => {
