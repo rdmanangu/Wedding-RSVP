@@ -291,6 +291,10 @@
               <p class="venue-kicker">The Ceremony</p>
               <h3 class="venue-name" data-cfg="ceremony.name"></h3>
               <p class="venue-sub" data-cfg="ceremony.subtitle"></p>
+              <p class="venue-head-address">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-pin" /></svg>
+                <span data-cfg="ceremony.address"></span>
+              </p>
             </div>
 
             <div class="venue-info">
@@ -307,10 +311,6 @@
               <button type="button" class="map-enable" data-map-enable="ceremony">Tap to explore the map</button>
             </div>
             <div class="venue-address">
-              <p class="venue-addr">
-                <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-pin" /></svg>
-                <span data-cfg="ceremony.address"></span>
-              </p>
               <p class="venue-plus" data-plus="ceremony" hidden></p>
               <p class="venue-place" data-place="ceremony" hidden></p>
             </div>
@@ -329,6 +329,10 @@
               <p class="venue-kicker">The Reception</p>
               <h3 class="venue-name" data-cfg="reception.name"></h3>
               <p class="venue-sub" id="receptionSub" data-cfg="reception.subtitle"></p>
+              <p class="venue-head-address">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-pin" /></svg>
+                <span data-cfg="reception.address"></span>
+              </p>
             </div>
 
             <div class="venue-info">
@@ -345,10 +349,6 @@
               <button type="button" class="map-enable" data-map-enable="reception">Tap to explore the map</button>
             </div>
             <div class="venue-address">
-              <p class="venue-addr">
-                <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-pin" /></svg>
-                <span data-cfg="reception.address"></span>
-              </p>
               <p class="venue-plus" data-plus="reception" hidden></p>
               <p class="venue-place" data-place="reception" hidden></p>
             </div>
@@ -484,6 +484,18 @@
             <span class="letter-seal" aria-hidden="true"><img src="images/Wedding Monogram.jpeg" alt="" width="1254" height="1254" loading="lazy" decoding="async" /></span>
           </div>
         </article>
+      </div>
+    </section>
+
+    <!-- 8. OUR LOVE STORY (milestones are edited in script.js > story) -->
+    <section class="section rose" id="story" aria-labelledby="story-title">
+      <div class="container">
+        <header class="section-head reveal">
+          <p class="eyebrow">How it began</p>
+          <h2 id="story-title" class="section-title">Our Love Story</h2>
+          <svg class="orn" aria-hidden="true"><use href="#ornament" /></svg>
+        </header>
+        <ol class="timeline" id="timeline"></ol>
       </div>
     </section>
 

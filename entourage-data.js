@@ -6,11 +6,11 @@ window.entourageData = {
   principalSponsors: [
     {
       title: "Male Principal Sponsors",
-      names: ["Mr. Ian Manangu", "Mr. Andrelito de Leon", "Mr. Alexander de Leon", "Mr. Freddie Inoncillo", "Mr. Cenen Carpio", "Dr. Floyd Arroyo", "Hon. Reynaldo Baylon", "Mr. Eufrocinio M. Carpio", "Mr. Ramil Jimenez", "Mr. Leandro Carpio", "Mr. Hilario Gerona", "Mr. Joy Sagum", "Mr. Virgilio Hernandez", "Mr. Arturo Bautista"]
+      names: ["Mr. Ian Manangu", "Mr. Andrelito de Leon", "Mr. Alexander de Leon", "Mr. Freddie Inoncillo", "Mr. Cenen Carpio", "Dr. Floyd Arroyo", "Hon. Reynaldo Baylon", "Mr. Eufrocinio Carpio", "Mr. Ramil Jimenez", "Mr. Leandro Carpio", "Mr. Hilario Gerona", "Mr. Joy Sagum", "Mr. Virgilio Hernandez", "Mr. Arturo Bautista"]
     },
     {
       title: "Female Principal Sponsors",
-      names: ["Mrs. Julieta Laurente", "Mrs. Florence Acle", "Mrs. Karen Pantalunan", "Mrs. Evelyn Reyes", "Mrs. Emma Sanossian", "Dra. Marcia Kabamalan", "Mrs. Elena Baylon", "Mrs. Annie C. Biglang awa", "Mrs. Mary Angerene Carpio", "Mrs. Ma. Theresa Carpio", "Mrs. Felicidad Musngi", "Mrs. Maristela Carpio", "Mrs. Helma Ronquillo", "Mrs. Maria Fe Manliclic"]
+      names: ["Mrs. Julieta Laurente", "Mrs. Florence Acle", "Mrs. Karen Pantalunan", "Mrs. Evelyn Reyes", "Mrs. Emma Sanossian", "Dra. Marcia Kabamalan", "Mrs. Elena Baylon", "Mrs. Annie Biglang-awa", "Mrs. Mary Angerene Carpio", "Mrs. Ma. Theresa Carpio", "Mrs. Felicidad Musngi", "Mrs. Maristela Carpio", "Mrs. Helma Ronquillo", "Mrs. Maria Fe Manliclic"]
     }
   ],
   weddingParty: {

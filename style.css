@@ -387,7 +387,7 @@ body.js-ready .reveal.visible { opacity: 1; transform: none; }
 
 /* ---------- Venue cards (ceremony + reception) ---------- */
 .venue-date { margin: 0 auto 1.5rem; text-align: center; color: var(--wine); font: 600 1.2rem var(--font-head); }
-.venue-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; align-items: stretch; }
+.venue-grid { display: grid; grid-template-columns: 1fr; gap: 1.35rem; align-items: stretch; }
 .venue-card + .venue-card { margin-top: 0; }
 .venue-card {
   display: flex; flex-direction: column; background: var(--ivory); overflow: hidden;
@@ -399,47 +399,52 @@ body.js-ready .reveal.visible { opacity: 1; transform: none; }
 #details .corner { opacity: .5; }
 
 .venue-head {
-  text-align: center; padding: 0 1.4rem 1.5rem; color: var(--ivory);
+  text-align: center; padding: 1.4rem 1.35rem 1.45rem; color: var(--ivory);
   background: linear-gradient(160deg, var(--burgundy), var(--wine));
-  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .3rem;
-  min-height: 390px;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .4rem;
+  min-height: 0;
 }
 .venue-icon {
-  width: 54px; height: 54px; border-radius: 50%; display: grid; place-items: center; margin-bottom: .35rem;
+  width: 48px; height: 48px; border-radius: 50%; display: grid; place-items: center; margin-bottom: .15rem;
   border: 1.5px solid var(--gold); color: var(--gold); background: rgba(255, 248, 240, .1);
   box-shadow: inset 0 0 0 3px rgba(92, 0, 24, .35);
 }
-.venue-icon svg { width: var(--icon-size-md); height: var(--icon-size-md); }
-/* Optional photo (config ceremony.photo / reception.photo): bleeds to the
-   card's top edge; stays display:none when the config field is empty. */
-.venue-photo-wrap { width: 100%; aspect-ratio: 16 / 9; overflow: hidden; }
+.venue-icon svg { width: 22px; height: 22px; }
+/* Optional photo (config ceremony.photo / reception.photo): stays display:none
+   when the config field is empty. Both cards share one image aspect ratio. */
+.venue-photo-wrap { width: 100%; aspect-ratio: 3 / 2; overflow: hidden; background: var(--wine); }
 .venue-photo { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center; }
-.venue-photo[data-photo="ceremony"] { object-position: center 35%; }
-.venue-kicker { font: 700 .79rem var(--font-body); letter-spacing: .3em; text-transform: uppercase; color: var(--gold); margin: 0; }
-.venue-name { font-family: var(--font-head); font-weight: 600; font-size: clamp(1.55rem, 4.4vw, 2rem); line-height: 1.2; color: var(--ivory); margin: .15rem 0 0; }
-.venue-sub { font: 600 1rem var(--font-body); color: var(--rose); margin: .15rem 0 0; }
+.venue-photo[data-photo="ceremony"] { object-position: center 45%; }
+.venue-kicker { font: 700 .76rem/1.3 var(--font-body); letter-spacing: .26em; text-transform: uppercase; color: var(--gold); margin: 0; }
+.venue-name {
+  font-family: var(--font-head); font-weight: 600; font-size: clamp(1.45rem, 4vw, 1.9rem); line-height: 1.15;
+  color: var(--ivory); margin: .1rem 0 0; text-wrap: balance;
+}
+.venue-sub { font: 600 1rem/1.45 var(--font-body); color: var(--rose); margin: .1rem 0 0; }
+.venue-head-address {
+  display: flex; align-items: flex-start; justify-content: center; gap: .4rem;
+  max-width: 30rem; margin: .05rem auto 0; color: var(--rose);
+  font: 500 .88rem/1.45 var(--font-body);
+}
+.venue-head-address svg { width: 16px; height: 16px; flex: none; margin-top: .18em; color: var(--gold); }
 
-.venue-info { flex: 1; display: flex; flex-direction: column; gap: .85rem; padding: 1.5rem 1.5rem 1.3rem; background: var(--ivory); }
-.venue-meta { list-style: none; margin: 0; padding: 0; display: grid; gap: .65rem; }
+.venue-info { flex: 1; display: flex; flex-direction: column; justify-content: center; gap: .5rem; padding: .9rem 1.35rem 1rem; background: var(--ivory); }
+.venue-meta { list-style: none; margin: 0; padding: 0; display: grid; gap: .55rem; }
 /* Lining figures: Cormorant's default old-style numerals make "2:00 PM" and
    "26, 2026" look small and uneven next to Lato. */
-.venue-meta li { display: grid; grid-template-columns: 22px 1fr; gap: .7rem; align-items: center; font: 600 1.05rem var(--font-head); color: var(--wine); font-variant-numeric: lining-nums; }
-.venue-meta-icon { width: var(--icon-size-sm); height: var(--icon-size-sm); color: var(--gold-deep); }
-.venue-addr { display: grid; grid-template-columns: 22px 1fr; gap: .7rem; align-items: start; margin: 0; color: var(--ink-soft); font-size: 1rem; line-height: 1.5; }
-.venue-addr svg { width: 20px; height: 20px; color: var(--gold-deep); margin-top: .15rem; }
-/* Secondary address lines stay aligned with the address text (icon column + gap). */
-.venue-place { margin: 0; padding-left: calc(22px + .7rem); font-size: .95rem; font-style: italic; color: var(--ink-soft); }
-.venue-plus { margin: 0; padding-left: calc(22px + .7rem); font-size: .85rem; letter-spacing: .02em; color: var(--ink-soft); }
+.venue-meta li { display: flex; align-items: center; justify-content: center; gap: .55rem; width: 100%; font: 600 1.05rem/1.35 var(--font-head); color: var(--wine); text-align: center; font-variant-numeric: lining-nums; }
+.venue-meta-icon { width: 18px; height: 18px; flex: none; color: var(--gold-deep); }
+.venue-place { margin: 0; text-align: center; font-size: .9rem; font-style: italic; color: var(--ink-soft); }
+.venue-plus { margin: 0; text-align: center; font-size: .82rem; letter-spacing: .02em; color: var(--ink-soft); }
 
 .venue-map { position: relative; border: 1px solid var(--gold); border-radius: 12px; overflow: hidden; background: var(--rose); }
 .venue-map iframe { display: block; width: 100%; height: 220px; border: 0; pointer-events: none; }
 .venue-map.map-enabled iframe { pointer-events: auto; }
 .map-enable { position: absolute; inset: auto 50% 1rem auto; transform: translateX(50%); border: 1px solid var(--gold); border-radius: 999px; padding: .5rem .75rem; background: rgba(255, 248, 240, .94); color: var(--wine); font: 700 .78rem var(--font-body); white-space: nowrap; cursor: pointer; }
 .map-enabled .map-enable { opacity: 0; pointer-events: none; }
-.venue-address { padding: .8rem 1.5rem; background: var(--ivory); }
-.venue-actions { display: grid; grid-template-columns: 1fr 1fr; gap: .7rem; margin-top: auto; padding: 1.1rem 1.5rem 1.7rem; background: var(--ivory); }
+.venue-address { padding: .7rem 1.35rem .8rem; text-align: center; background: var(--ivory); }
+.venue-actions { display: grid; grid-template-columns: 1fr 1fr; gap: .6rem; margin-top: auto; padding: .9rem 1.35rem 1.25rem; background: var(--ivory); }
 .venue-actions .btn { width: 100%; }
-.venue-card#ceremony .venue-name { font-size: clamp(1.3rem, 2.5vw, 1.8rem); }
 .copy-status { text-align: center; min-height: 1.6em; margin: 1rem 0 0; color: var(--burgundy); font-weight: 700; font-size: .9rem; }
 .copy-status.light { color: var(--gold); }
 
@@ -521,10 +526,6 @@ body.js-ready .reveal.visible { opacity: 1; transform: none; }
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: .35rem 28px;
-}
-.flower-girl-centered {
-  margin: .35rem auto 0;
-  text-align: center;
 }
 
 /* ---------- Attire guide (dress code) ---------- */
@@ -807,10 +808,16 @@ body.js-ready .reveal.visible { opacity: 1; transform: none; }
 }
 @media (max-width: 639px) {
   .entourage-grid-two, .entourage-grid-three { grid-template-columns: 1fr; }
+  .entourage-grid { row-gap: 2rem; }
   .entourage-grid-two > .entourage-group:nth-child(odd),
   .entourage-grid-two > .entourage-group:nth-child(even) { text-align: center; }
-  .entourage-flower-girls ul { grid-template-columns: 1fr; gap: .35rem; }
-  .entourage-major { margin-top: 2.5rem; padding-top: 1.6rem; }
+  .entourage-group h4 { margin-bottom: .65rem; font-size: .82rem; letter-spacing: .16em; }
+  .entourage-group li { font-size: 17px; line-height: 1.55; }
+  .entourage-major { margin-top: 2.1rem; padding-top: 1.5rem; }
+  .entourage-major > h3 { margin-bottom: 1.35rem; }
+  .entourage-party-leads { margin-bottom: 2rem; }
+  .entourage-flower-girls { margin-top: 2rem; }
+  .entourage-flower-girls ul { grid-template-columns: 1fr; gap: .3rem; }
 }
 @media (min-width: 860px) {
   .hero-grid { grid-template-columns: 1fr 1.15fr; text-align: left; justify-items: stretch; }
@@ -834,8 +841,7 @@ body.js-ready .reveal.visible { opacity: 1; transform: none; }
     .venue-card { display: grid; grid-template-rows: subgrid; }
   }
   @supports not (grid-template-rows: subgrid) {
-    .venue-card { min-height: 930px; }
-    .venue-head { min-height: 390px; }
+    .venue-card { display: flex; flex-direction: column; }
     .venue-actions { margin-top: auto; }
   }
 }
@@ -884,15 +890,22 @@ body.js-ready .reveal.visible { opacity: 1; transform: none; }
   .wc-monogram img {
     object-fit: contain;
   }
+  .venue-grid { gap: 1.25rem; }
   .venue-photo {
     object-fit: cover;
   }
-  .venue-head,
-  .venue-info,
-  .venue-address,
-  .venue-actions {
-    padding-inline: 1.15rem;
+  .venue-head {
+    padding: 1.1rem 1.15rem 1.2rem;
+    gap: .35rem;
   }
+  .venue-icon { width: 44px; height: 44px; }
+  .venue-name { font-size: clamp(1.35rem, 5.8vw, 1.65rem); }
+  .venue-sub { font-size: .95rem; }
+  .venue-head-address { font-size: .82rem; }
+  .venue-info { padding: .75rem 1.15rem .8rem; }
+  .venue-address { padding: .55rem 1.15rem .65rem; }
+  .venue-actions { padding: .8rem 1.15rem 1.05rem; }
+  .venue-map iframe { height: 190px; }
   .venue-photo-wrap { width: 100%; margin-inline: 0; }
   .schedule-panel {
     margin-top: 2rem;

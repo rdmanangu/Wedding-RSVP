@@ -50,8 +50,8 @@ const weddingConfig = {
     name: "Nuestra Señora de la Merced Parish Church",
     time: "2:00 PM",
     timeText: "Ceremony begins at 2:00 PM",
-    subtitle: "Candaba, Pampanga",
-    address: "Candaba - Baliuag Rd, Candaba, 2013 Pampanga",
+    subtitle: "",
+    address: "Bahay Pare, Candaba, Pampanga",
     // Official Google Maps place URL: powers "View Location" and map fallbacks.
     placeUrl: "https://www.google.com/maps/place/2VJJ%2B5R2+Our+Lady+of+Mercy+Parish+Church,+Candaba+-+Baliuag+Rd,+Candaba,+2013+Pampanga/data=!4m2!3m1!1s0x3396fe0fd0ed4ecf:0x963db98b08af8bf2?sa=X&ved=1t:242&ictx=111",
     // Exact pin (latitude,longitude) used for the embedded preview and directions.
@@ -98,7 +98,7 @@ const weddingConfig = {
     photo: "images/reception.jpg",
     photoAlt: "The Chapters, MDSF Social Hall reception venue in Baliuag, Bulacan",
     startTime: "5:00 PM",   // e.g. "5:00 PM". Leave "" until confirmed.
-    endTime: "",     // e.g. "10:00 PM". Leave "" until confirmed.
+    endTime: "10:00 PM",     // e.g. "10:00 PM". Leave "" until confirmed.
     // Optional plain-language address or landmark, shown under the address.
     // FILL IN ONLY A CONFIRMED DETAIL. Leave "" to keep it hidden.
     landmark: ""
@@ -118,12 +118,12 @@ const weddingConfig = {
   // time is not already represented by a schedule entry.
   schedule: [
     { time: "1:30 PM",        title: "Guest Arrival",         detail: "" },
-    { time: "2:00 PM", title: "Wedding Ceremony",      detail: "Nuestra Señora de la Merced Parish Church" },
+    { time: "2:00 PM", title: "Wedding Ceremony",      detail: "" },
     { time: "3:30 PM",        title: "Ceremony Concludes",    detail: "" },
     { time: "4:00 PM",        title: "Cocktail hour begins",   detail: "" },
     { time: "5:00 PM",        title: "Reception Program",     detail: "" },
-    { time: "7:00 PM",        title: "Dinner",                detail: "" },
-    { time: "10:00 PM",        title: "After Party",           detail: "" }
+    { time: "7:00 PM",        title: "Dinner and Party",                detail: "" },
+    { time: "10:00 PM",        title: "Party Ends",           detail: "" }
   ],
 
   // ---------- Dress code / attire guide ----------
@@ -146,16 +146,38 @@ const weddingConfig = {
     ]
   },
 
-  // ---------- Love story (personal story NOT yet provided) ----------
-  // A milestone only appears if it has "text" or an "image"; empty ones are
-  // hidden, and the whole section hides when none remain. No "coming soon"
-  // cards are ever shown. Photos load from the images/ folder.
-  story: [
-    { date: "", title: "How We Met",             text: "", image: "" },
-    { date: "", title: "Our First Date",         text: "", image: "" },
-    { date: "", title: "The Proposal",           text: "", image: "" },
-    { date: "", title: "The Beginning of Forever", text: "", image: "" }
-  ],
+story: [
+  {
+    date: "2015",
+    title: "How We Met",
+    text: "Their story began back in 2015 on a completely ordinary day at FACOMA. John was out on the court, playing basketball with his cousins and friends, while Celina was getting her steps in—jogging and walking around the area with her cousins. It seemed like just another day, but amidst the movement and noise, they noticed each other. John asked his cousin about Celina, who happened to be one of her schoolmates, and used that tiny link to break the ice.",
+    image: ""
+  },
+  {
+    date: "2015",
+    title: "A Simple Hello",
+    text: "A simple 'hi' popped up on Celina's screen shortly after. That single word opened the door to endless late-night texts, hours-long phone calls, and a connection that quickly grew deeper than either of them anticipated.",
+    image: ""
+  },
+  {
+    date: "Through the Years",
+    title: "A Love Worth Fighting For",
+    text: "Their story wasn't without its hurdles—in many ways, it felt like a forbidden love. In the beginning, the odds seemed stacked against them, and more than a few voices doubted whether they would make it. But John never backed down. He stood his ground, face-to-face with every challenge, and quietly yet firmly proved his love to everyone watching. He showed, without a shadow of a doubt, that he was worth every risk and worth fighting for. In the end, love won.",
+    image: ""
+  },
+  {
+    date: "December 7, 2025",
+    title: "The Proposal",
+    text: "Since then, they have built a life filled with countless memories, standing shoulder-to-shoulder through every milestone and adventure life has tossed their way. The defining moment came on December 7, 2025, at Cioccolo Cafe in Angeles City. Surrounded by the love and support of both their families, John asked Celina to spend forever with him—and she said yes.",
+    image: ""
+  },
+  {
+    date: "December 26, 2026",
+    title: "The Beginning of Forever",
+    text: "Today, with full hearts and absolute certainty, they are more than ready to say 'yes' to forever and step together into their most beautiful chapter yet. What began with a simple hello in 2015 will become a lifetime promise on December 26, 2026.",
+    image: ""
+  }
+],
 
   // ---------- A note from the couple ----------
   // Separate paragraphs with a blank line.
@@ -318,6 +340,30 @@ const weddingConfig = {
       section.appendChild(content);
       return section;
     };
+    const titleGender = (name) => {
+      const title = name.trim().split(/\s+/)[0].replace(/\./g, "").toLowerCase();
+      if (["mr", "sir"].includes(title)) return "male";
+      if (["ms", "mrs", "miss", "maam", "dra"].includes(title)) return "female";
+      return "";
+    };
+    const alternateSponsors = (names) => {
+      const males = [];
+      const females = [];
+      const others = [];
+      names.forEach((name) => {
+        const gender = titleGender(name);
+        if (gender === "male") males.push(name);
+        else if (gender === "female") females.push(name);
+        else others.push(name);
+      });
+      const ordered = [];
+      const count = Math.max(males.length, females.length);
+      for (let i = 0; i < count; i += 1) {
+        if (i < males.length) ordered.push(males[i]);
+        if (i < females.length) ordered.push(females[i]);
+      }
+      return ordered.concat(others);
+    };
 
     root.replaceChildren();
     root.appendChild(grid(data.parents, "entourage-grid-two"));
@@ -328,17 +374,17 @@ const weddingConfig = {
     party.appendChild(grid(data.weddingParty.groups, "entourage-grid-two"));
     root.appendChild(major("", party));
 
-    root.appendChild(major("Secondary Sponsors", grid(data.secondarySponsors, "entourage-grid-three")));
+    const secondarySponsors = data.secondarySponsors.map((item) => ({
+      title: item.title,
+      names: alternateSponsors(item.names)
+    }));
+    root.appendChild(major("Secondary Sponsors", grid(secondarySponsors, "entourage-grid-three")));
 
     const ceremony = make("div", "entourage-ceremony");
     ceremony.appendChild(grid(data.ceremonyParticipants.groups, "entourage-grid-three"));
     const flowerGirls = data.ceremonyParticipants.flowerGirls;
     const flowerNames = flowerGirls.names || [];
-    const flowerColumns = make("div", "entourage-grid entourage-grid-two entourage-flower-girls");
-    flowerColumns.appendChild(group({ title: flowerGirls.title, names: flowerNames.slice(0, 4) }));
-    flowerColumns.appendChild(group({ title: flowerGirls.title, names: flowerNames.slice(4, 8) }));
-    ceremony.appendChild(flowerColumns);
-    ceremony.appendChild(group({ title: flowerGirls.title, names: flowerNames.slice(8, 9) }, "flower-girl-centered"));
+    ceremony.appendChild(group({ title: flowerGirls.title, names: flowerNames }, "entourage-flower-girls"));
     root.appendChild(major("Little Attendants", ceremony));
   }
 
@@ -448,6 +494,8 @@ const weddingConfig = {
         if (has(secondaryAddress)) { placeEl.textContent = secondaryAddress; placeEl.hidden = false; }
         else placeEl.hidden = true;
       }
+      const addressWrap = plusEl ? plusEl.closest(".venue-address") : null;
+      if (addressWrap) addressWrap.hidden = plusEl.hidden && (!placeEl || placeEl.hidden);
 
       // Optional photo at the top of the card. Nothing is rendered (no
       // placeholder box) when the config field is empty or the file is missing.
