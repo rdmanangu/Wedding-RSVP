@@ -306,17 +306,25 @@
               </ul>
             </div>
 
-            <div class="venue-map" data-map-shell="ceremony">
-              <iframe data-map-embed="ceremony" title="Map of Nuestra Señora de la Merced Parish Church, the wedding ceremony venue" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
-              <button type="button" class="map-enable" data-map-enable="ceremony">Tap to explore the map</button>
-            </div>
-            <div class="venue-address">
+            <div class="venue-preview" data-venue-preview="ceremony">
+              <div class="venue-preview-head">
+                <span class="venue-preview-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24"><use href="#icon-pin" /></svg>
+                </span>
+                <div class="venue-preview-text">
+                  <p class="venue-preview-label">Venue Location</p>
+                  <p class="venue-preview-name" data-cfg="ceremony.name"></p>
+                  <p class="venue-preview-address" data-cfg="ceremony.address"></p>
+                </div>
+              </div>
               <p class="venue-plus" data-plus="ceremony" hidden></p>
-              <p class="venue-place" data-place="ceremony" hidden></p>
+              <a class="btn venue-directions" data-map-dir="ceremony" target="_blank" rel="noopener noreferrer" aria-label="Get directions to the ceremony venue on Google Maps">
+                <svg class="venue-directions-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-pin" /></svg>
+                <span>Get Directions</span>
+              </a>
             </div>
 
-            <div class="venue-actions">
-              <a class="btn btn-sm" data-map-dir="ceremony" target="_blank" rel="noopener noreferrer">Get Directions</a>
+            <div class="venue-actions venue-actions-single">
               <button type="button" class="btn btn-sm btn-ghost venue-copy" data-copy="ceremony">Copy Address</button>
             </div>
           </article>
@@ -344,17 +352,25 @@
               </ul>
             </div>
 
-            <div class="venue-map" data-map-shell="reception">
-              <iframe data-map-embed="reception" title="Map of The Chapters, MDSF Social Hall, the wedding reception venue" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
-              <button type="button" class="map-enable" data-map-enable="reception">Tap to explore the map</button>
-            </div>
-            <div class="venue-address">
+            <div class="venue-preview" data-venue-preview="reception">
+              <div class="venue-preview-head">
+                <span class="venue-preview-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24"><use href="#icon-pin" /></svg>
+                </span>
+                <div class="venue-preview-text">
+                  <p class="venue-preview-label">Venue Location</p>
+                  <p class="venue-preview-name" data-cfg="reception.details"></p>
+                  <p class="venue-preview-address" data-cfg="reception.address"></p>
+                </div>
+              </div>
               <p class="venue-plus" data-plus="reception" hidden></p>
-              <p class="venue-place" data-place="reception" hidden></p>
+              <a class="btn venue-directions" data-map-dir="reception" target="_blank" rel="noopener noreferrer" aria-label="Get directions to the reception venue on Google Maps">
+                <svg class="venue-directions-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-pin" /></svg>
+                <span>Get Directions</span>
+              </a>
             </div>
 
-            <div class="venue-actions">
-              <a class="btn btn-sm" data-map-dir="reception" target="_blank" rel="noopener noreferrer">Get Directions</a>
+            <div class="venue-actions venue-actions-single">
               <button type="button" class="btn btn-sm btn-ghost venue-copy" data-copy="reception">Copy Address</button>
             </div>
           </article>

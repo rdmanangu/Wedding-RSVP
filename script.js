@@ -442,12 +442,11 @@ story: [
   function mapLinks(venue) {
     const query = [venue.name, venue.address, venue.plusCode].filter(has).join(", ");
     const q = enc(query);
-    return {
-      view: has(venue.placeUrl) ? venue.placeUrl : "https://www.google.com/maps?q=" + q,
-      dir: "https://www.google.com/maps/dir/?api=1&destination=" + q,
-      embed: has(venue.mapEmbedUrl) ? venue.mapEmbedUrl
-        : "https://www.google.com/maps?q=" + q + "&z=16&output=embed"
-    };
+    // Prefer the exact Google Maps place URL stored in weddingConfig; fall
+    // back to a directions search built from the confirmed venue details.
+    const destination = has(venue.placeUrl) ? venue.placeUrl
+      : "https://www.google.com/maps/dir/?api=1&destination=" + q;
+    return { view: destination, dir: destination };
   }
 
   function setupMaps() {
@@ -459,22 +458,11 @@ story: [
       const links = mapLinks(v);
       const venueTitle = (key === "ceremony" ? v.name : (has(v.details) ? v.details : v.name));
       const kind = key === "ceremony" ? "wedding ceremony" : "wedding reception";
-      $$('[data-map-embed="' + key + '"]').forEach((f) => {
-        f.src = links.embed;
-        f.title = "Map of " + venueTitle + ", the " + kind + " venue";
-      });
       $$('[data-map-dir="' + key + '"]').forEach((a) => {
         a.href = links.dir;
-        a.setAttribute("aria-label", "Get directions to " + venueTitle + ", the " + kind + " venue");
-      });
-      $$('[data-map-enable="' + key + '"]').forEach((button) => {
-        button.addEventListener("click", () => {
-          const shell = button.closest(".venue-map");
-          if (!shell) return;
-          shell.classList.add("map-enabled");
-          button.setAttribute("aria-label", "Map interaction enabled for " + venueTitle);
-          button.textContent = "Map interaction enabled";
-        });
+        a.target = "_blank";
+        a.rel = "noopener noreferrer";
+        a.setAttribute("aria-label", "Get directions to " + venueTitle + ", the " + kind + " venue, on Google Maps");
       });
     });
   }
@@ -514,8 +502,7 @@ story: [
     setupVenueMeta();
   }
 
-  function copyToClipboard(text) {
-    if (navigator.clipboard && window.isSecureContext) return navigator.clipboard.writeText(text);
+  function legacyCopy(text) {
     return new Promise((resolve, reject) => {
       const ta = make("textarea");
       ta.value = text;
@@ -523,9 +510,19 @@ story: [
       ta.style.cssText = "position:fixed;opacity:0;top:0;left:0";
       document.body.appendChild(ta);
       ta.select();
+      ta.setSelectionRange(0, ta.value.length);
       try { document.execCommand("copy") ? resolve() : reject(); } catch (e) { reject(e); }
-      ta.remove();
+      finally { ta.remove(); }
     });
+  }
+
+  function copyToClipboard(text) {
+    // In-app browsers (Messenger, Facebook) can expose the Clipboard API but
+    // reject writes, so fall back to the legacy copy command instead of failing.
+    if (navigator.clipboard && window.isSecureContext) {
+      return navigator.clipboard.writeText(text).catch(() => legacyCopy(text));
+    }
+    return legacyCopy(text);
   }
 
   function flash(btn, statusEl, done, msg) {
