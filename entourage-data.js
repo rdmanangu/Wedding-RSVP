@@ -30,7 +30,7 @@ window.entourageData = {
   ],
   ceremonyParticipants: {
     groups: [
-      { title: "Coin Bearer", names: ["Theo Adne Mallari","Ethaniel Guevarra"] },
+      { title: "Coin Bearers", names: ["Theo Adne Mallari","Ethaniel Guevarra"] },
       { title: "Ring Bearers", names: ["Mavin Gerona", "John Kiel Maveen Mallari"] },
       { title: "Bible Bearer", names: ["Nataniel Andrei Sale"] }
     ],
