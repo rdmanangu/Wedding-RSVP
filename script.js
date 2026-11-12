@@ -107,7 +107,7 @@ const weddingConfig = {
   // ---------- RSVP ----------
   rsvp: {
     url: "https://forms.gle/ZQGyfWB2T3SoHjm86",
-    deadline: "2026-12-15",    // "YYYY-MM-DD". Leave "" to hide. Do not guess a date.
+    deadline: "2026-12-06",    // "YYYY-MM-DD". Leave "" to hide. Do not guess a date.
     contact: "09299624294 or 09604445695",      // Optional organizer contact shown in the FAQ and after the deadline.
     reservedSeats: "" // Optional confirmed per-guest seat count; stays hidden when empty.
   },
