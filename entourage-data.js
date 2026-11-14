@@ -34,6 +34,6 @@ window.entourageData = {
       { title: "Ring Bearers", names: ["Mavin Gerona", "John Kiel Maveen Mallari"] },
       { title: "Bible Bearer", names: ["Nataniel Andrei Sale"] }
     ],
-    flowerGirls: { title: "Flower Girls", names: ["Ariana Louise Manangu", "Kate Ysabella Carrasco", "Amanda Brielle Acle", "Ceesha Enyl Mallari", "Caelie Elexah Mallari", "Shane Salaysay", "Kairie Crisha Garcia", "Moira Alivia Carpio", "Adi Jane Mallari","Xaneah Krichelle Carpio"] }
+    flowerGirls: { title: "Flower Girls", names: ["Ariana Louise Manangu", "Kate Ysabella Carrasco", "Amanda Brielle Acle", "Ceesha Enyl Mallari", "Caelie Elexah Mallari", "Shane Salaysay", "Kairie Crisha Garcia", "Moira Alivia Carpio", "Adi Jane Mallari"]}
   }
 };
